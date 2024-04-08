@@ -6,15 +6,6 @@ namespace LegacyApp
     {
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
-            
-            Boolean isName = isNameCorrect(firstName, lastName, email);
-            Boolean isAge = isAgeCorrect(dateOfBirth);
-
-            if (!isName || !isAge)
-            {
-                return false;
-            }
-            
             var clientRepository = new ClientRepository();
             var client = clientRepository.GetById(clientId);
 
@@ -26,34 +17,16 @@ namespace LegacyApp
                 FirstName = firstName,
                 LastName = lastName
             };
-
-            if (client.Type == "VeryImportantClient")
-            {
-                user.HasCreditLimit = false;
-            }
-            else if (client.Type == "ImportantClient")
-            {
-                using (var userCreditService = new UserCreditService())
-                {
-                    int creditLimit = userCreditService.GetCreditLimit(user.LastName, user.DateOfBirth);
-                    creditLimit = creditLimit * 2;
-                    user.CreditLimit = creditLimit;
-                }
-            }
-            else
-            {
-                user.HasCreditLimit = true;
-                using (var userCreditService = new UserCreditService())
-                {
-                    int creditLimit = userCreditService.GetCreditLimit(user.LastName, user.DateOfBirth);
-                    user.CreditLimit = creditLimit;
-                }
-            }
-
-            if (user.HasCreditLimit && user.CreditLimit < 500)
+            
+            Boolean isName = isNameCorrect(firstName, lastName, email);
+            Boolean isAge = isAgeCorrect(dateOfBirth);
+            
+            if (!isName || !isAge || (user.HasCreditLimit && user.CreditLimit < 500))
             {
                 return false;
             }
+            
+            setCreditLimit(client, user);
 
             UserDataAccess.AddUser(user);
             return true;
@@ -82,9 +55,33 @@ namespace LegacyApp
             return true;
         }
 
-        public void setCeditLimit(Client user)
+        public void setCreditLimit(Client client, User user)
         {
-            
+            if (client.Type == "VeryImportantClient")
+            {
+                user.HasCreditLimit = false;
+                Console.WriteLine("Card doesn't have credit limit for customer: " + user.Client + " " + user.LastName);
+            }
+            else if (client.Type == "ImportantClient")
+            {
+                using (var userCreditService = new UserCreditService())
+                {
+                    int creditLimit = userCreditService.GetCreditLimit(user.LastName, user.DateOfBirth);
+                    creditLimit = creditLimit * 2;
+                    user.CreditLimit = creditLimit;
+                }
+                Console.WriteLine("Credit limit has been set to " + user.CreditLimit + " for customer: " + user.Client + " " + user.LastName);
+            }
+            else
+            {
+                user.HasCreditLimit = true;
+                using (var userCreditService = new UserCreditService())
+                {
+                    int creditLimit = userCreditService.GetCreditLimit(user.LastName, user.DateOfBirth);
+                    user.CreditLimit = creditLimit;
+                }
+                Console.WriteLine("Credit limit has been set to " + user.CreditLimit + " for customer: " + user.Client + " " + user.LastName);
+            }
         }
     }
 }
