@@ -41,6 +41,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "PrimeService.Model": {
+              "target": "Package",
+              "version": "[1.0.0.4, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.7.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -94,6 +108,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "PrimeService.Model": {
+              "target": "Package",
+              "version": "[1.0.0.4, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.7.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

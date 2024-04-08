@@ -9,4 +9,10 @@
     <ProjectReference Include="..\LegacyApp\LegacyApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="4.1.0" />
+    <PackageReference Include="PrimeService.Model" Version="1.0.0.4" />
+    <PackageReference Include="xunit" Version="2.7.0" />
+  </ItemGroup>
+
 </Project>

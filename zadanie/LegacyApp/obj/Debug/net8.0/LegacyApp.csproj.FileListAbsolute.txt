@@ -22,3 +22,6 @@ C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\obj\Debug\net8.0
 C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\obj\Debug\net8.0\refint\LegacyApp.dll
 C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\obj\Debug\net8.0\LegacyApp.pdb
 C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\obj\Debug\net8.0\ref\LegacyApp.dll
+C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\bin\Debug\net8.0\LegacyApp.runtimeconfig.json
+C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\obj\Debug\net8.0\LegacyApp.csproj.AssemblyReference.cache
+C:\Users\laura\OneDrive\Pulpit\apbd-zadanie-4\zadanie\LegacyApp\obj\Debug\net8.0\LegacyApp.genruntimeconfig.cache
