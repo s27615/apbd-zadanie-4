@@ -6,25 +6,15 @@ namespace LegacyApp
     {
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+            
+            Boolean isName = isNameCorrect(firstName, lastName, email);
+            Boolean isAge = isAgeCorrect(dateOfBirth);
+
+            if (!isName || !isAge)
             {
                 return false;
             }
-
-            if (!email.Contains("@") && !email.Contains("."))
-            {
-                return false;
-            }
-
-            var now = DateTime.Now;
-            int age = now.Year - dateOfBirth.Year;
-            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
-
-            if (age < 21)
-            {
-                return false;
-            }
-
+            
             var clientRepository = new ClientRepository();
             var client = clientRepository.GetById(clientId);
 
@@ -67,6 +57,34 @@ namespace LegacyApp
 
             UserDataAccess.AddUser(user);
             return true;
+        }
+
+        public Boolean isNameCorrect(string firstName, string lastName, string email)
+        {
+            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || (!email.Contains("@") && !email.Contains(".")))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean isAgeCorrect(DateTime dateOfBirth)
+        {
+            var now = DateTime.Now;
+            int age = now.Year - dateOfBirth.Year;
+            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
+
+            if (age < 21)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void setCeditLimit(Client user)
+        {
+            
         }
     }
 }
